@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-w71j&n$l5ka4i#1uh!8(3(#lf3b%v)ikydq%vwh*8fp$dzp7u(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['to-do-final-live.onrender.com']
+ALLOWED_HOSTS = ['to-do-final-live.onrender.com','127.0.0.1:8000','127.0.0.1']
 
 
 # Application definition
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'django_sonar'
 ]
 
 MIDDLEWARE = [
@@ -51,7 +52,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_sonar.middlewares.requests.RequestsMiddleware'
 ]
+
+
 
 ROOT_URLCONF = 'to_do_final.urls'
 CORS_ALLOW_ALL_ORIGINS = True
@@ -133,3 +137,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DJANGO_SONAR = {
+    'excludes': [
+        STATIC_URL,
+        # MEDIA_URL,
+        '/sonar/',
+        '/admin/',
+        '/__reload__/',
+    ],
+}
